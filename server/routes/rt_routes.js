@@ -37,7 +37,7 @@ router.post('/edit', (req, res) => {
     })
 }) 
 
-router.post('/eliminar', (req, res) => {
+router.post('/eliminarDatos', (req, res) => {
     let id = req.body.id
     db.test.eliminarProducto(id).then(() => {
         res.redirect('/') 
