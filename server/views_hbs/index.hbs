@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hola</h1>
+
+    {{#each values}}
+    <div>
+        <p>{{id}}. {{nombre}}-{{marca}}-{{unidad}}-{{existencia}} ${{precio}} </p>
+        <button class="btnEditar" value="{{id}}" type="submit">Editar</button>
+        <form action="/eliminar" method="POST">
+            <button class="btnEditar" value="{{id}}" name="id" type="submit">Borrar</button>
+        </form>
+    </div>
+    {{/each}}
+
+    <br>
+    <form action="/" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="text" name="precio" placeholder="Precio">
+        <input type="submit" value="Ingresar">
+    </form>
+
+    <br>
+    <form action="/edit" method="POST">
+        <input class="idFila" type="hidden" name="idFil">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="text" name="precio" placeholder="Precio">
+        <input type="submit" value="Editar">
+    </form>
+
+    <script>
+        let dato = 1
+        const $boton = document.querySelectorAll('.btnEditar')
+        const $idFila = document.querySelector('.idFila')
+        for (let i = 0; i < $boton.length; i++) {
+            $boton[i].addEventListener('click', () => {
+                $idFila.value = $boton[i].value
+                console.log($idFila.value)
+            })
+        }
+    </script>
+</body>
+
+</html>
