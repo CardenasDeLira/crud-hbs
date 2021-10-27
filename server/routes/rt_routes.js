@@ -7,15 +7,16 @@ router.post('/rt_nuevo_articulo', (req, res) => {
     res.json(req.body.nombre)
 })
 
+/*
 router.delete('/', (req, res) => {
     //const id = req.params.elim
     console.log('Hey boss')
-    /*db.test.eliminarProductos(id).then(() => {
+    db.test.eliminarProductos(id).then(() => {
         res.redirect('/')
     }).catch((err) => {S
         console.log(err)
-    })*/
-})
+    })
+})*/
 
 router.post('/', (req, res) => {
     let valores = req.body
@@ -40,6 +41,16 @@ router.post('/edit', (req, res) => {
 router.post('/eliminarDatos', (req, res) => {
     let id = req.body.id
     db.test.eliminarProducto(id).then(() => {
+        res.redirect('/') 
+    }).catch((err) => {
+        console.log(err)
+    })
+})
+
+router.put('/', (req, res) => {
+    let datos = req.body
+    console.log(datos)
+    db.test.editarProducto(datos).then(() => {
         res.redirect('/') 
     }).catch((err) => {
         console.log(err)

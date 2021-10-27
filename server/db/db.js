@@ -31,10 +31,13 @@ const test = {
         }
     },
     editarProducto: async (valores) => {
-        let { idFil, nombre, precio } = valores
+        let { id, nombre, marca, precio, unidad, existencia} = valores
         try {
             await sql_conn.request()
-                .query(`UPDATE PRODUCTOS SET NOMBRE='${nombre}', PRECIO=${precio} WHERE ID=${idFil}`)
+                .query(`UPDATE PRODUCTOS SET NOMBRE = '${nombre.toUpperCase()}', 
+                MARCA = '${marca.toUpperCase()}', PRECIO = ${precio}, 
+                UNIDAD = '${unidad.toUpperCase()}', EXISTENCIA = ${existencia} 
+                WHERE ID=${id}`)
         } catch (error) {
             throw error
         }
