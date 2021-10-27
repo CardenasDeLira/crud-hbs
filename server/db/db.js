@@ -1,12 +1,29 @@
 const sql = require('mssql')
 const { sql_conn } = require('./config')
 
+
+const capitalizar = (palabra) => {
+    palabra = palabra.toLowerCase()
+    return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+}
+
 const test = {
     obtenerProductos: async () => {
         try {
-            let resultado = await sql_conn.request()
-                .query(`SELECT * FROM PRODUCTOS WHERE ESTATUS = 1`)
-            return (resultado)
+            let resultado = await sql_conn.request().query(`SELECT * FROM PRODUCTOS WHERE ESTATUS = 1`)
+            const param = {}
+            param.values = resultado.recordset.map(datos => {
+                return {
+                    id: datos.ID,
+                    nombre: capitalizar(datos.NOMBRE),
+                    marca: capitalizar(datos.MARCA),
+                    precio: datos.PRECIO,
+                    unidad: datos.UNIDAD,
+                    existencia: datos.EXISTENCIA,
+                    estatus: datos.ESTATUS
+                }
+            })
+            return (param)
         } catch (error) {
             throw error
         }
@@ -31,13 +48,13 @@ const test = {
         }
     },
     editarProducto: async (valores) => {
-        let { id, nombre, marca, precio, unidad, existencia} = valores
+        let { id, nombre, marca, precio, unidad, existencia } = valores
         try {
             await sql_conn.request()
                 .query(`UPDATE PRODUCTOS SET NOMBRE = '${nombre.toUpperCase()}', 
                 MARCA = '${marca.toUpperCase()}', PRECIO = ${precio}, 
                 UNIDAD = '${unidad.toUpperCase()}', EXISTENCIA = ${existencia} 
-                WHERE ID=${id}`)
+                WHERE ID = ${id}`)
         } catch (error) {
             throw error
         }

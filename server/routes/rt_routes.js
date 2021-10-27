@@ -51,7 +51,8 @@ router.put('/', (req, res) => {
     let datos = req.body
     console.log(datos)
     db.test.editarProducto(datos).then(() => {
-        res.redirect('/') 
+        let params = db.test.obtenerProductos()
+        res.render('index', params)
     }).catch((err) => {
         console.log(err)
     })

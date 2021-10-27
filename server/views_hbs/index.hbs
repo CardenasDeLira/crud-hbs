@@ -23,8 +23,11 @@
 
     <br>
     <form action="/" method="POST">
-        <input type="text" name="nombre" placeholder="Nombre">
-        <input type="text" name="precio" placeholder="Precio">
+        <input class="addNombre" type="text" name="nombre" placeholder="Nombre">
+        <input class="addMarca" type="text" name="marca" placeholder="Marca">
+        <input class="addPrecio" type="text" name="precio" placeholder="Precio">
+        <input class="addUnidad" type="text" name="unidad" placeholder="Unidad">
+        <input class="addExistencia" type="text" name="existencia" placeholder="Existencia">
         <input type="submit" value="Ingresar">
     </form>
 
@@ -61,7 +64,7 @@
             })
         }
 
-        function editarDatos() {
+        function editarDatos(event) {
             fetch('/', {
                 method: 'PUT',
                 headers: {
@@ -74,14 +77,13 @@
                     precio: $editarPrecio.value,
                     unidad: $editarUnidad.value,
                     existencia: $editarExistencia.value
-
                 })
             })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(function (error) {
-                console.log('Hubo un eror ' + error.message)
-            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(function (error) {
+                    console.log('Hubo un error ' + error.message)
+                })
         }
     </script>
 </body>
