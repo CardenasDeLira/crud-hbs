@@ -1,7 +1,22 @@
-    <div>
-        <p>{{id}}. {{nombre}}-{{marca}}-{{unidad}}-{{existencia}} ${{precio}} </p>
-        <button class="btnEditar" value="{{id}}" type="submit">Editar</button>
-        <form action="/eliminarDatos" method="POST">
-            <button class="btnEditar" value="{{id}}" name="id" type="submit">Borrar</button>
-        </form>
+{{#each values}}
+<div class="card" style="width: 200px;">
+    <div class="card-header">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-secondary btnEditar" data-bs-toggle="tooltip"
+                    data-bs-placement="top" title="Editar" value="{{id}}">ET</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-secondary btnEliminar" data-bs-toggle="tooltip"
+                    data-bs-placement="top" title="Eliminar" onclick="eliminarDato({{id}})" value="{{id}}">et</button>
+            </div>
+        </div>
     </div>
+    <img src="img/000000.png" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{nombre}}</h5>
+        <p class="card-text">{{marca}}</p>
+        <p class="card-text">${{precio}} MXN</p>
+    </div>
+</div>
+{{/each}}

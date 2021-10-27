@@ -7,17 +7,6 @@ router.post('/rt_nuevo_articulo', (req, res) => {
     res.json(req.body.nombre)
 })
 
-/*
-router.delete('/', (req, res) => {
-    //const id = req.params.elim
-    console.log('Hey boss')
-    db.test.eliminarProductos(id).then(() => {
-        res.redirect('/')
-    }).catch((err) => {S
-        console.log(err)
-    })
-})*/
-
 router.post('/rt_articulos', (req, res) => {
     let valores = req.body
     console.log(valores)
@@ -38,27 +27,36 @@ router.post('/edit', (req, res) => {
     })
 })
 
-router.post('/eliminarDatos', (req, res) => {
-    let id = req.body.id
-    db.test.eliminarProducto(id).then(() => {
-        res.redirect('/')
-    }).catch((err) => {
-        console.log(err)
-    })
+router.delete('/rt_articulos', async (req, res) => {
+    try {
+        let id = req.body.id
+        await db.test.eliminarProducto(id)
+        let params = await db.test.obtenerProductos()
+        res.render('partials/articulos', { layout: '', ...params }, (error, html) => {
+            if (error) {
+                return res.json({
+                    estado: 0
+                })
+            }
+            console.log(html)
+            res.json({
+                estado: 1,
+                html
+            })
+        })
+    } catch (error) {
+        res.json({
+            estado: 0
+        })
+    }
 })
 
 router.put('/rt_articulos', async (req, res) => {
     try {
         let datos = req.body
-        //console.log(datos)
         await db.test.editarProducto(datos)
         let params = await db.test.obtenerProductos()
-        //console.log(params)
-        /*res.json({
-            estado: 1,
-            datos: params
-        })*/
-        res.render('partials/iteradorArticulos', {layout: '', ...params}, (error, html) => {
+        res.render('partials/articulos', { layout: '', ...params }, (error, html) => {
             if (error) {
                 return res.json({
                     estado: 0
