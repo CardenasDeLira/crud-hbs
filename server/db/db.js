@@ -10,7 +10,7 @@ const capitalizar = (palabra) => {
 const test = {
     obtenerProductos: async () => {
         try {
-            let resultado = await sql_conn.request().query(`SELECT * FROM PRODUCTOS WHERE ESTATUS = 1`)
+            let resultado = await sql_conn.request().query(`SELECT * FROM PRODUCTOS WHERE ESTATUS = 1 ORDER BY ID DESC`)
             const param = {}
             param.values = resultado.recordset.map(datos => {
                 return {

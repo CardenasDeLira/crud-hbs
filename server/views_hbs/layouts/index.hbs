@@ -15,18 +15,18 @@
     {{> header}}
 
     <div class="container">
-        <form action="/" method="post" class="row">
-                <div class="col"> <input type="text" class="form-control" name="nomArticulo" placeholder="Nombre del Articulo"> </div>
-                <div class="col"> <input type="text" class="form-control" name="marca" placeholder="Marca"> </div>
-                <div class="col"> <input type="text" class="form-control" name="precio" placeholder="Precio"> </div>
-                <div class="col"> <input type="text" class="form-control" name="unidad" placeholder="Unidad"> </div>
-                <div class="col"> <input type="text" class="form-control" name="existencia" placeholder="Existencia"> </div>
-                <div class="col"> <button class="btn btnag">Agregar</button> </div>
+        <div class="row">
+                <div class="col"> <input type="text" class="form-control addNombre" name="adNombre" placeholder="Nombre del Articulo"> </div>
+                <div class="col"> <input type="text" class="form-control addMarca" name="adMarca" placeholder="Marca"> </div>
+                <div class="col"> <input type="text" class="form-control addPrecio" name="adPrecio" placeholder="Precio"> </div>
+                <div class="col"> <input type="text" class="form-control addUnidad" name="adUnidad" placeholder="Unidad"> </div>
+                <div class="col"> <input type="text" class="form-control addExistencia" name="adExistencia" placeholder="Existencia"> </div>
+                <div class="col"> <button class="btn" onclick="addDato()">Agregar</button> </div>
                 {{!-- <div class="col">
                     <div class="row">
                         <div class="col">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" name="activo">
+                                <input class="form-check-input" type="checkbox activo">" name="activo">
                                 <label class="form-check-label">Activo</label>
                             </div>
                         </div>

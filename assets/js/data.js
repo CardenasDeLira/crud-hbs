@@ -7,6 +7,13 @@ const $editarPrecio = document.querySelector('.editPrecio')
 const $editarUnidad = document.querySelector('.editUnidad')
 const $editarExistencia = document.querySelector('.editExistencia')
 
+//Agregar
+const $addNombre = document.querySelector('.addNombre')
+const $addMarca = document.querySelector('.addMarca')
+const $addPrecio = document.querySelector('.addPrecio')
+const $addUnidad = document.querySelector('.addUnidad')
+const $addExistencia = document.querySelector('.addExistencia')
+
 //Proceso para editar
 const $botonEditar = document.querySelectorAll('.btnEditar')
 const $idFila = document.querySelector('.idFila')
@@ -17,17 +24,30 @@ for (let i = 0; i < $botonEditar.length; i++) {
     })
 }
 
-//Proceso para eliminar
-const $botonEliminar = document.querySelectorAll('.btnEliminar')
-/*for (let i = 0; i < $botonEliminar.length; i++) {
-    $botonEliminar[i].addEventListener('click', () => {
-        //$idFila.value = $botonEditar[i].value
-        //dato = $botonEliminar[i].value
-        //eliminarDato(dato)
-    })    
-}*/
-
 //Funciones
+function addDato() {
+    fetch('/rt_articulos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            nombre: $addNombre.value,
+            marca: $addMarca.value,
+            precio: $addPrecio.value,
+            unidad: $addUnidad.value,
+            existencia: $addExistencia.value
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('contenedor').innerHTML = data.html
+        })
+        .catch(function (error) {
+            console.log('Hubo un error ' + error.message)
+        })
+}
+
 function editarDatos(event) {
     fetch('/rt_articulos', {
         method: 'PUT',
@@ -45,7 +65,7 @@ function editarDatos(event) {
     })
         .then(response => response.json())
         .then(data => {
-            document.getElementById('container').innerHTML = data.html
+            document.getElementById('contenedor').innerHTML = data.html
         })
         .catch(function (error) {
             console.log('Hubo un error ' + error.message)

@@ -7,24 +7,27 @@ router.post('/rt_nuevo_articulo', (req, res) => {
     res.json(req.body.nombre)
 })
 
-router.post('/rt_articulos', (req, res) => {
+router.post('/rt_articulos', async (req, res) => {
     let valores = req.body
-    console.log(valores)
-    db.test.addProducto(valores).then(() => {
-        res.redirect('/')
-    }).catch((err) => {
-        console.log(err)
-    })
-})
-
-router.post('/edit', (req, res) => {
-    let valores = req.body
-    console.log(valores)
-    db.test.editarProducto(valores).then(() => {
-        res.redirect('/')
-    }).catch((err) => {
-        console.log(err)
-    })
+    try {
+        console.log(valores)
+        await db.test.addProducto(valores)
+        let params = await db.test.obtenerProductos()
+        res.render('partials/articulos', { layout: '', ...params }, (error, html) => {
+            if (error) {
+                return res.json({
+                    estado: 0
+                })
+            }
+            console.log(html)
+            res.json({
+                estado: 1,
+                html
+            })
+        })
+    } catch (error) {
+        throw error
+    }
 })
 
 router.delete('/rt_articulos', async (req, res) => {
