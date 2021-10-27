@@ -1,0 +1,7 @@
+    <div>
+        <p>{{id}}. {{nombre}}-{{marca}}-{{unidad}}-{{existencia}} ${{precio}} </p>
+        <button class="btnEditar" value="{{id}}" type="submit">Editar</button>
+        <form action="/eliminarDatos" method="POST">
+            <button class="btnEditar" value="{{id}}" name="id" type="submit">Borrar</button>
+        </form>
+    </div>

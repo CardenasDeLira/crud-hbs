@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hola</h1>
+
+    <div id="container">
+        {{>iteradorArticulos}}
+    </div>
+
+    <br>
+    <form action="/" method="POST">
+        <input class="addNombre" type="text" name="nombre" placeholder="Nombre">
+        <input class="addMarca" type="text" name="marca" placeholder="Marca">
+        <input class="addPrecio" type="text" name="precio" placeholder="Precio">
+        <input class="addUnidad" type="text" name="unidad" placeholder="Unidad">
+        <input class="addExistencia" type="text" name="existencia" placeholder="Existencia">
+        <input type="submit" value="Ingresar">
+    </form>
+
+    <br>
+    <!--<form action="/edit" method="POST">
+        <input type="hidden" name="idFil">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="text" name="precio" placeholder="Precio">
+        <input type="submit" value="Editar">
+    </form>-->
+
+    <input class="idFila" type="hidden" name="idFil">
+    <input class="editNombre" type="text" name="nombre" placeholder="Nombre">
+    <input class="editMarca" type="text" name="marca" placeholder="Marca">
+    <input class="editPrecio" type="text" name="precio" placeholder="Precio">
+    <input class="editUnidad" type="text" name="unidad" placeholder="Unidad">
+    <input class="editExistencia" type="text" name="existencia" placeholder="Existencia">
+    <button class="editarDatos" onclick="editarDatos(event)">Editar</button>
+
+    <script src="/js/data.js"></script>
+</body>
+
+</html>
